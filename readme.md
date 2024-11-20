@@ -75,43 +75,43 @@ We provide calibration information for each sensor (LiDAR, 4D radar, camera) of 
 ### 4DRadar-based Cooperative 3D Detector (no-compression)
 | **Method** | **Validation (IoU=0.3/0.5/0.7)** | **Testing (IoU=0.3/0.5/0.7)** | **Config** |  **Model**  |
 |:--------------------------------:|:--------------------------------:|:-----------------------------:|:----------:|:-----------:|
-|         ITSC2021:PFA-Net         |         76.90/68.00/39.30        |       85.10/79.90/52.50       |      √     | coming soon |
-|           NIPS2022:RTNH          |         71.70/62.20/34.40        |       73.70/67.70/41.90       |      √     | coming soon |
-|          CoRL2022:CoBEVT         |         80.20/73.40/41.10        |       85.80/80.60/52.90       |      √     | coming soon |
-|          ECCV2022:V2XVit         |         71.14/64.28/31.12        |       80.94/73.82/42.73       |      √     | coming soon |
-|         ICRA2022:AttFuse         |         75.30/66.50/36.10        |       81.80/75.40/48.20       |      √     | coming soon |
-|         ICRA2023:CoAlign         |         65.80/59.20/34.70        |       76.90/70.20/46.20       |      √     | coming soon |
-|        NIPS2023:Where2comm       |         69.41/62.07/26.63        |       77.77/72.94/41.47       |      √     | coming soon |
-|          ICCV2023:SCOPE          |         71.87/66.93/53.25        |       72.21/69.13/53.49       |      √     | coming soon |
-|        WACV2023:AdaFusion        |         77.84/72.48/42.85        |       82.20/78.08/55.51       |      √     | coming soon |
-|           IROS2024:SICP          |         70.08/60.62/32.43        |       71.45/63.47/33.39       |      √     | coming soon |
+|         ITSC2021:PFA-Net         |         76.90/68.00/39.30        |       85.10/79.90/52.50       |      √     | coming |
+|           NIPS2022:RTNH          |         71.70/62.20/34.40        |       73.70/67.70/41.90       |      √     | coming |
+|          CoRL2022:CoBEVT         |         80.20/73.40/41.10        |       85.80/80.60/52.90       |      √     | coming |
+|          ECCV2022:V2XVit         |         71.14/64.28/31.12        |       80.94/73.82/42.73       |      √     | coming |
+|         ICRA2022:AttFuse         |         75.30/66.50/36.10        |       81.80/75.40/48.20       |      √     | coming |
+|         ICRA2023:CoAlign         |         65.80/59.20/34.70        |       76.90/70.20/46.20       |      √     | coming |
+|        NIPS2023:Where2comm       |         69.41/62.07/26.63        |       77.77/72.94/41.47       |      √     | coming |
+|          ICCV2023:SCOPE          |         71.87/66.93/53.25        |       72.21/69.13/53.49       |      √     | coming |
+|        WACV2023:AdaFusion        |         77.84/72.48/42.85        |       82.20/78.08/55.51       |      √     | coming |
+|           IROS2024:SICP          |         70.08/60.62/32.43        |       71.45/63.47/33.39       |      √     | coming |
 
 ### LiDAR-based Cooperative 3D Detector (no-compression)
 | **Method** | **Validation (IoU=0.3/0.5/0.7)** | **Testing (IoU=0.3/0.5/0.7)** | **Config** |  **Model**  |
 |:------------------------------:|:--------------------------------:|:-----------------------------:|:----------:|:-----------:|
-| ICRA2022:Attfuse               | 72.87/69.63/56.24                | 87.09/86.15/75.42             |      √     | coming soon |
-| ECCV2022:V2XViT                | 84.99/82.22/64.92                | 90.14/89.01/77.71             |      √     | coming soon |
-| CoRL2022:CoBEVT                | 87.64/84.79/71.01                | 92.29/91.44/82.45             |      √     | coming soon |
-| ICRA2023:CoAlign               | 89.08/87.57/80.05                | 89.59/88.89/83.29             |      √     | coming soon |
-| ICCV:AdaFusion                 | 88.11/86.91/75.61                | 92.70/90.60/84.80             |      √     | coming soon |
-| NeurIPS2023:Where2comm         | 83.14/80.27/56.76                | 88.14/86.07/69.16             |      √     | coming soon |
-| ICCV2023:SCOPE                 | 80.12/77.39/64.17                | 85.72/84.90/75.38             |      √     | coming soon |
-| WACV2024:MACP                  | 81.51/80.60/73.44                | 88.24/88.19/86.63             |      √     | coming soon |
-| IROS2024:SICP                  | 81.14/77.62/58.14                | 84.64/82.17/66.71             |      √     | coming soon |
+| ICRA2022:Attfuse               | 72.87/69.63/56.24                | 87.09/86.15/75.42             |      √     | coming |
+| ECCV2022:V2XViT                | 84.99/82.22/64.92                | 90.14/89.01/77.71             |      √     | coming |
+| CoRL2022:CoBEVT                | 87.64/84.79/71.01                | 92.29/91.44/82.45             |      √     | coming |
+| ICRA2023:CoAlign               | 89.08/87.57/80.05                | 89.59/88.89/83.29             |      √     | coming |
+| ICCV:AdaFusion                 | 88.11/86.91/75.61                | 92.70/90.60/84.80             |      √     | coming |
+| NeurIPS2023:Where2comm         | 83.14/80.27/56.76                | 88.14/86.07/69.16             |      √     | coming |
+| ICCV2023:SCOPE                 | 80.12/77.39/64.17                | 85.72/84.90/75.38             |      √     | coming |
+| WACV2024:MACP                  | 81.51/80.60/73.44                | 88.24/88.19/86.63             |      √     | coming |
+| IROS2024:SICP                  | 81.14/77.62/58.14                | 84.64/82.17/66.71             |      √     | coming |
 
 ### LiDAR-4D Radar based Cooperative 3D Detector (no-compression)
 |       **Method**       | **Validation (IoU=0.3/0.5/0.7)** | **Testing (IoU=0.3/0.5/0.7)** | **Config** |  **Model**  |
 |:----------------------:|:--------------------------------:|:-----------------------------:|:----------:|:-----------:|
-|  IROS2023:InterFusion  |         81.23/77.33/52.93        |       87.91/86.51/69.63       |      √     | coming soon |
-|     Arxiv2024:L4DR     |         84.58/82.75/70.29        |       90.78/89.62/82.91       |      √     | coming soon |
-|    ICRA2022:AttFuse    |         86.14/84.30/70.72        |       92.20/90.70/84.60       |      √     | coming soon |
-|     CoRL2022:CoBEVT    |         87.72/87.02/78.56        |       94.00/93.21/86.68       |      √     | coming soon |
-|     ECCV2022:V2XViT    |         85.23/83.90/69.77        |       91.99/91.22/83.04       |      √     | coming soon |
-| NeurIPS2023:Where2comm |         87.62/85.58/69.61        |       92.20/91.00/82.04       |      √     | coming soon |
-|    ICRA2023:CoAlign    |         87.16/85.54/73.79        |       92.14/91.21/83.77       |      √     | coming soon |
-|     ICCV2023:Scope     |         78.79/77.96/62.57        |       83.38/82.89/70.00       |      √     | coming soon |
-|   WACV2023:AdaFusion   |         89.24/87.31/74.86        |       93.10/92.15/85.48       |      √     | coming soon |
-|      IROS2024:SICP     |         82.46/79.44/61.51        |       86.19/84.20/68.15       |      √     | coming soon |
+|  IROS2023:InterFusion  |         81.23/77.33/52.93        |       87.91/86.51/69.63       |      √     | coming |
+|     Arxiv2024:L4DR     |         84.58/82.75/70.29        |       90.78/89.62/82.91       |      √     | coming |
+|    ICRA2022:AttFuse    |         86.14/84.30/70.72        |       92.20/90.70/84.60       |      √     | coming |
+|     CoRL2022:CoBEVT    |         87.72/87.02/78.56        |       94.00/93.21/86.68       |      √     | coming |
+|     ECCV2022:V2XViT    |         85.23/83.90/69.77        |       91.99/91.22/83.04       |      √     | coming |
+| NeurIPS2023:Where2comm |         87.62/85.58/69.61        |       92.20/91.00/82.04       |      √     | coming |
+|    ICRA2023:CoAlign    |         87.16/85.54/73.79        |       92.14/91.21/83.77       |      √     | coming |
+|     ICCV2023:Scope     |         78.79/77.96/62.57        |       83.38/82.89/70.00       |      √     | coming |
+|   WACV2023:AdaFusion   |         89.24/87.31/74.86        |       93.10/92.15/85.48       |      √     | coming |
+|      IROS2024:SICP     |         82.46/79.44/61.51        |       86.19/84.20/68.15       |      √     | coming |
 
 ## :balloon: Quickly Get Started
 For installation, model training/testing, and use of the MDD module refer to [document](V2X-R/README.md)
