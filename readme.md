@@ -10,6 +10,7 @@
 ## :balloon: Introduction
 :wave: This is the official repository for the V2X-R, including the V2X-R dataset and the implementation of the benchmark model, and MDD module. 
 
+Here again is a reference repository for LiDAR, 4D Radar cooperative sensing codes
 
 ## :balloon: V2X-R Dataset Manual 
 The first V2X dataset incorporates LiDAR, camera, and **4D radar**. V2X-R contains **12,079 scenarios** with **37,727 frames of LiDAR and 4D radar point clouds**, **150,908 images**, and **170,859 annotated 3D vehicle bounding boxes**.
