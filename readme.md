@@ -54,11 +54,7 @@ V2X-R # root path of v2x-r
 We provide calibration information for each sensor (LiDAR, 4D radar, camera) of each agent for inter-sensor fusion. In particular, the exported 4D radar point cloud has been converted to the LiDAR coordinate system of the corresponding agent in advance to facilitate fusion, so the 4D radar point cloud is referenced to the LiDAR coordinate system.
 
 
-## :balloon: Installation
-
 ## :balloon: Benchmark and Models Zoo
-### Performance
-### Implementation 
 
-
-## :balloon: Training with MDD
+## :balloon: Quickly Get Started
+For installation , model training/testing, and use of the MDD module refer to [document](V2X-R/README.md)
