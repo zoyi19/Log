@@ -23,7 +23,8 @@ The first V2X dataset incorporates LiDAR, camera, and **4D radar**. V2X-R contai
 Thanks to the [CARLA](https://github.com/carla-simulator/carla) simulator and the [OpenCDA](https://github.com/ucla-mobility/OpenCDA) framework, our V2X-R simulation dataset was implemented on top of them. In addition, our dataset route acquisition process partly references [V2XViT](https://github.com/DerrickXuNu/v2x-vit), which researchers can reproduce according to the data_protocol in the dataset.
 
 ### Download and Decompression
-:ledger: The data can be found from this URL. 
+:ledger: Log in [here](http://39.98.109.195:1000/) using the username "Guest" and the password "guest_CMD" to download the dataset.
+
 
 Since the data is large (including 3xLiDAR{normal, fog, snow}, 1xradar, 4ximages for each agent). We have compressed the sequence data of each agent, you can refer to this code for batch decompression after downloading.
 ```python
@@ -72,47 +73,48 @@ We provide calibration information for each sensor (LiDAR, 4D radar, camera) of 
 
 
 ## :balloon: Benchmark and Models Zoo
+All benchmark model downloads require a login (using the username "Guest" and the password "guest_CMD")
 ### 4DRadar-based Cooperative 3D Detector (no-compression)
 | **Method** | **Validation (IoU=0.3/0.5/0.7)** | **Testing (IoU=0.3/0.5/0.7)** | **Config** |  **Model**  |
 |:--------------------------------:|:--------------------------------:|:-----------------------------:|:----------:|:-----------:|
-|         ITSC2021:PFA-Net         |         76.90/68.00/39.30        |       85.10/79.90/52.50       |      √     | coming |
-|           NIPS2022:RTNH          |         71.70/62.20/34.40        |       73.70/67.70/41.90       |      √     | coming |
-|          ECCV2022:V2XViT         |         71.14/64.28/31.12        |       80.94/73.82/42.73       |      √     | coming |
-|         ICRA2022:AttFuse         |         75.30/66.50/36.10        |       81.80/75.40/48.20       |      √     | coming |
-|        NIPS2023:Where2comm       |         71.60/67.20/42.90        |       80.40/77.30/56.70       |      √     | coming |
-|          ICCV2023:SCOPE          |         61.90/59.30/47.90        |       73.00/71.60/51.60       |      √     | coming |
-|          CoRL2023:CoBEVT         |         80.20/73.40/41.10        |       85.80/80.60/52.90       |      √     | coming |
-|         ICRA2023:CoAlign         |         65.80/59.20/34.70        |       76.90/70.20/46.20       |      √     | coming |
-|        WACV2023:AdaFusion        |         77.84/72.48/42.85        |       82.20/78.08/55.51       |      √     | coming |
-|           IROS2024:SICP          |         70.08/60.62/32.43        |       71.45/63.47/33.39       |      √     | coming |
+|         ITSC2021:PFA-Net         |         76.90/68.00/39.30        |       85.10/79.90/52.50       |      [√](V2X-R/opencood/hypes_yaml/V2X-R/4DRadar/V2XR_PFA_net.yaml)     | [√](http://39.98.109.195:1000/files/V2X-R_Dataset(compressed)/benchmark/radar) |
+|           NIPS2022:RTNH          |         71.70/62.20/34.40        |       73.70/67.70/41.90       |      [√](V2X-R/opencood/hypes_yaml/V2X-R/4DRadar/V2XR_RTNH.yaml)     | [√](http://39.98.109.195:1000/files/V2X-R_Dataset(compressed)/benchmark/radar) |
+|          ECCV2022:V2XViT         |         71.14/64.28/31.12        |       80.94/73.82/42.73       |      [√](V2X-R/opencood/hypes_yaml/V2X-R/4DRadar/V2XR_v2xvit.yaml)     | [√](http://39.98.109.195:1000/files/V2X-R_Dataset(compressed)/benchmark/radar) |
+|         ICRA2022:AttFuse         |         75.30/66.50/36.10        |       81.80/75.40/48.20       |      [√](V2X-R/opencood/hypes_yaml/V2X-R/4DRadar/V2XR_attfuse.yaml)     | [√](http://39.98.109.195:1000/files/V2X-R_Dataset(compressed)/benchmark/radar) |
+|        NIPS2023:Where2comm       |         71.60/67.20/42.90        |       80.40/77.30/56.70       |      [√](V2X-R/opencood/hypes_yaml/V2X-R/4DRadar/V2XR_where2comm.yaml)     | [√](http://39.98.109.195:1000/files/V2X-R_Dataset(compressed)/benchmark/radar) |
+|          ICCV2023:SCOPE          |         61.90/59.30/47.90        |       73.00/71.60/51.60       |      [√](V2X-R/opencood/hypes_yaml/V2X-R/4DRadar/V2XR_scope.yaml)     | [√](http://39.98.109.195:1000/files/V2X-R_Dataset(compressed)/benchmark/radar) |
+|          CoRL2023:CoBEVT         |         80.20/73.40/41.10        |       85.80/80.60/52.90       |      [√](V2X-R/opencood/hypes_yaml/V2X-R/4DRadar/V2XR_cobevt.yaml)     | [√](http://39.98.109.195:1000/files/V2X-R_Dataset(compressed)/benchmark/radar) |
+|         ICRA2023:CoAlign         |         65.80/59.20/34.70        |       76.90/70.20/46.20       |      [√](V2X-R/opencood/hypes_yaml/V2X-R/4DRadar/V2XR_coalign.yaml)     | [√](http://39.98.109.195:1000/files/V2X-R_Dataset(compressed)/benchmark/radar) |
+|        WACV2023:AdaFusion        |         77.84/72.48/42.85        |       82.20/78.08/55.51       |      [√](V2X-R/opencood/hypes_yaml/V2X-R/4DRadar/V2XR_adafusion.yaml)     | [√](http://39.98.109.195:1000/files/V2X-R_Dataset(compressed)/benchmark/radar) |
+|           IROS2024:SICP          |         70.08/60.62/32.43        |       71.45/63.47/33.39       |      [√](V2X-R/opencood/hypes_yaml/V2X-R/4DRadar/V2XR_sicp.yaml)     | [√](http://39.98.109.195:1000/files/V2X-R_Dataset(compressed)/benchmark/radar) |
 
 ### LiDAR-based Cooperative 3D Detector (no-compression)
 | **Method** | **Validation (IoU=0.3/0.5/0.7)** | **Testing (IoU=0.3/0.5/0.7)** | **Config** |  **Model**  |
 |:------------------------------:|:--------------------------------:|:-----------------------------:|:----------:|:-----------:|
-| ECCV2022:V2XViT                | 84.99/82.22/64.92                | 90.14/89.01/77.71             |      √     | coming |
-| ICRA2022:AttFuse               | 86.00/82.20/66.90                | 91.40/89.60/80.20             |      √     | coming |
-| NeurIPS2023:Where2comm         | 85.20/83.10/65.90                | 91.60/88.50/80.50             |      √     | coming |
-| ICCV2023:SCOPE                 | 76.00/74.70/60.90                | 81.40/72.90/67.00             |      √     | coming |
-| CoRL2023:CoBEVT                | 87.64/84.79/71.01                | 92.29/91.44/82.45             |      √     | coming |
-| ICRA2023:CoAlign               | 89.08/87.57/80.05                | 89.59/88.89/83.29             |      √     | coming |
-| ICCV:AdaFusion                 | 88.11/86.91/75.61                | 92.70/90.60/84.80             |      √     | coming |
-| IROS2024:SICP                  | 81.14/77.62/58.14                | 84.64/82.17/66.71             |      √     | coming |
-| WACV2024:MACP                  | 72.80/70.90/60.00                | 83.70/83.10/75.50             |      √     | coming |
+| ECCV2022:V2XViT                | 84.99/82.22/64.92                | 90.14/89.01/77.71             |      [√](V2X-R/opencood/hypes_yaml/V2X-R/LiDAR/V2XR_v2xvit.yaml)     | [√](http://39.98.109.195:1000/files/V2X-R_Dataset(compressed)/benchmark/lidar) |
+| ICRA2022:AttFuse               | 86.00/82.20/66.90                | 91.40/89.60/80.20             |      [√](V2X-R/opencood/hypes_yaml/V2X-R/LiDAR/V2XR_attfuse.yaml)     | [√](http://39.98.109.195:1000/files/V2X-R_Dataset(compressed)/benchmark/lidar) |
+| NeurIPS2023:Where2comm         | 85.20/83.10/65.90                | 91.60/88.50/80.50             |      [√](V2X-R/opencood/hypes_yaml/V2X-R/LiDAR/V2XR_where2comm.yaml)     | [√](http://39.98.109.195:1000/files/V2X-R_Dataset(compressed)/benchmark/lidar) |
+| ICCV2023:SCOPE                 | 76.00/74.70/60.90                | 81.40/72.90/67.00             |      [√](V2X-R/opencood/hypes_yaml/V2X-R/LiDAR/V2XR_scope.yaml)     | [√](http://39.98.109.195:1000/files/V2X-R_Dataset(compressed)/benchmark/lidar) |
+| CoRL2023:CoBEVT                | 87.64/84.79/71.01                | 92.29/91.44/82.45             |      [√](V2X-R/opencood/hypes_yaml/V2X-R/LiDAR/V2XR_cobevt.yaml)     | [√](http://39.98.109.195:1000/files/V2X-R_Dataset(compressed)/benchmark/lidar) |
+| ICRA2023:CoAlign               | 89.08/87.57/80.05                | 89.59/88.89/83.29             |      [√](V2X-R/opencood/hypes_yaml/V2X-R/LiDAR/V2XR_coalign.yaml)     | [√](http://39.98.109.195:1000/files/V2X-R_Dataset(compressed)/benchmark/lidar) |
+| ICCV:AdaFusion                 | 88.11/86.91/75.61                | 92.70/90.60/84.80             |      [√](V2X-R/opencood/hypes_yaml/V2X-R/LiDAR/V2XR_adafusion.yaml)     | [√](http://39.98.109.195:1000/files/V2X-R_Dataset(compressed)/benchmark/lidar) |
+| IROS2024:SICP                  | 81.14/77.62/58.14                | 84.64/82.17/66.71             |      [√](V2X-R/opencood/hypes_yaml/V2X-R/LiDAR/V2XR_sicp.yaml)     | [√](http://39.98.109.195:1000/files/V2X-R_Dataset(compressed)/benchmark/lidar) |
+| WACV2024:MACP                  | 72.80/70.90/60.00                | 83.70/83.10/75.50             |      comming     | [√](http://39.98.109.195:1000/files/V2X-R_Dataset(compressed)/benchmark/lidar) |
 
 
 ### LiDAR-4D Radar based Cooperative 3D Detector (no-compression)
 |       **Method**       | **Validation (IoU=0.3/0.5/0.7)** | **Testing (IoU=0.3/0.5/0.7)** | **Config** |  **Model**  |
 |:----------------------:|:--------------------------------:|:-----------------------------:|:----------:|:-----------:|
-|  IROS2023:InterFusion  |         81.23/77.33/52.93        |       87.91/86.51/69.63       |      √     | coming |
-|     Arxiv2024:L4DR     |         84.58/82.75/70.29        |       90.78/89.62/82.91       |      √     | coming |
-|    ICRA2022:AttFuse    |         86.14/84.30/70.72        |       92.20/90.70/84.60       |      √     | coming |
-|     ECCV2022:V2XViT    |         85.23/83.90/69.77        |       91.99/91.22/83.04       |      √     | coming |
-|     ICCV2023:Scope     |         78.79/77.96/62.57        |       83.38/82.89/70.00       |      √     | coming |
-| NeurIPS2023:Where2comm |         87.62/85.58/69.61        |       92.20/91.00/82.04       |      √     | coming |
-|     CoRL2023:CoBEVT    |         87.72/87.02/78.56        |       94.00/93.21/86.68       |      √     | coming |
-|    ICRA2023:CoAlign    |         87.16/85.54/73.79        |       92.14/91.21/83.77       |      √     | coming |
-|   WACV2023:AdaFusion   |         89.24/87.31/74.86        |       93.10/92.15/85.48       |      √     | coming |
-|      IROS2024:SICP     |         82.46/79.44/61.51        |       86.19/84.20/68.15       |      √     | coming |
+|  IROS2023:InterFusion  |         81.23/77.33/52.93        |       87.91/86.51/69.63       |      [√](V2X-R/opencood/hypes_yaml/V2X-R/L_4DR_Fusion/V2XR_InterFusion.yaml)     | [√](http://39.98.109.195:1000/files/V2X-R_Dataset(compressed)/benchmark/l+r) |
+|     Arxiv2024:L4DR     |         84.58/82.75/70.29        |       90.78/89.62/82.91       |      [√](V2X-R/opencood/hypes_yaml/V2X-R/L_4DR_Fusion/V2XR_L4DR.yaml)     | [√](http://39.98.109.195:1000/files/V2X-R_Dataset(compressed)/benchmark/l+r) |
+|    ICRA2022:AttFuse    |         86.14/84.30/70.72        |       92.20/90.70/84.60       |      [√](V2X-R/opencood/hypes_yaml/V2X-R/L_4DR_Fusion/V2XR_AttFuse.yaml)     | [√](http://39.98.109.195:1000/files/V2X-R_Dataset(compressed)/benchmark/l+r) |
+|     ECCV2022:V2XViT    |         85.23/83.90/69.77        |       91.99/91.22/83.04       |      [√](V2X-R/opencood/hypes_yaml/V2X-R/L_4DR_Fusion/V2XR_V2XViT.yaml)     | [√](http://39.98.109.195:1000/files/V2X-R_Dataset(compressed)/benchmark/l+r) |
+|     ICCV2023:Scope     |         78.79/77.96/62.57        |       83.38/82.89/70.00       |      [√](V2X-R/opencood/hypes_yaml/V2X-R/L_4DR_Fusion/V2XR_Scope.yaml)     | [√](http://39.98.109.195:1000/files/V2X-R_Dataset(compressed)/benchmark/l+r) |
+| NeurIPS2023:Where2comm |         87.62/85.58/69.61        |       92.20/91.00/82.04       |      [√](V2X-R/opencood/hypes_yaml/V2X-R/L_4DR_Fusion/V2XR_where2comm.yaml)     | [√](http://39.98.109.195:1000/files/V2X-R_Dataset(compressed)/benchmark/l+r) |
+|     CoRL2023:CoBEVT    |         87.72/87.02/78.56        |       94.00/93.21/86.68       |      [√](V2X-R/opencood/hypes_yaml/V2X-R/L_4DR_Fusion/V2XR_Cobevt.yaml)     | [√](http://39.98.109.195:1000/files/V2X-R_Dataset(compressed)/benchmark/l+r) |
+|    ICRA2023:CoAlign    |         87.16/85.54/73.79        |       92.14/91.21/83.77       |      [√](V2X-R/opencood/hypes_yaml/V2X-R/L_4DR_Fusion/V2XR_CoAlign.yaml)     | [√](http://39.98.109.195:1000/files/V2X-R_Dataset(compressed)/benchmark/l+r) |
+|   WACV2023:AdaFusion   |         89.24/87.31/74.86        |       93.10/92.15/85.48       |      [√](V2X-R/opencood/hypes_yaml/V2X-R/L_4DR_Fusion/V2XR_AdaFusion.yaml)     | [√](http://39.98.109.195:1000/files/V2X-R_Dataset(compressed)/benchmark/l+r) |
+|      IROS2024:SICP     |         82.46/79.44/61.51        |       86.19/84.20/68.15       |      [√](V2X-R/opencood/hypes_yaml/V2X-R/L_4DR_Fusion/V2XR_Sicp.yaml)     | [√](http://39.98.109.195:1000/files/V2X-R_Dataset(compressed)/benchmark/l+r) |
 
 ## :balloon: Quickly Get Started
 For installation, model training/testing, and use of the MDD module refer to [document](V2X-R/README.md)
