@@ -22,6 +22,31 @@ The data can be found from this URL. Since the data is large (including 3xLiDAR{
 ### Dataset Collection
 Thanks to the [CARLA](https://github.com/carla-simulator/carla) simulator and the [OpenCDA](https://github.com/ucla-mobility/OpenCDA) framework, our V2X-R simulation dataset was implemented on top of them. In addition, our dataset route acquisition process partly references [V2XViT](https://github.com/DerrickXuNu/v2x-vit), which researchers can reproduce according to the data_protocol in the dataset.
 
+### Calibration
+We provide calibration information for each sensor (LiDAR, 4D radar, camera) of each agent for inter-sensor fusion. In particular, the exported 4D radar point cloud has been converted to the LiDAR coordinate system of the corresponding agent in advance to facilitate fusion, so the 4D radar point cloud is referenced to the LiDAR coordinate system.
+
+### Structure
+
+```sh
+V2X-R # root path of v2x-r
+├── train
+│   ├──Sequence name (time of data collection, e.g. 2024_06_24_20_24_02)
+│   │   ├──Agent Number ("-1" denotes infrastructure, otherwise is CAVs)
+│   │   │   ├──Data (including the following types of data)
+│   │   │   │ Timestamp.Type, eg.
+│   │   │   │ - 000060_camerai.png (i-th Camera),
+│   │   │   │ - 000060.pcd (LiDAR),
+│   │   │   │ - 000060_radar.pcd (4D radar),
+│   │   │   │ - 000060_fog.pcd (LiDAR with fog simulation),
+│   │   │   │ - 000060_snow.pcd (LiDAR with snow simulation),
+│   │   │   │ - 000060.yaml (LiDAR with fog simulation)
+├── validate
+│   ├──...
+├── test
+│   ├──...
+
+```
+
 
 ## Installation
 
