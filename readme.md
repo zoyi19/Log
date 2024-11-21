@@ -192,7 +192,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node
 
 
 
-#### Test the model
+### Test the model
 Before you run the following command, first make sure the `validation_dir` in config.yaml under your checkpoint folder
 
 ```python
