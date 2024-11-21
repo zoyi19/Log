@@ -155,7 +155,7 @@ All benchmark model downloads require a login (using the username "Guest" and th
 ## :balloon: Quickly Get Started
 
 ### Installation
-Refer to [Installation of V2X-R](V2X-R/README.md)
+Refer to [Installation of V2X-R](INSTALL.md)
 
 
 ### Train model 
