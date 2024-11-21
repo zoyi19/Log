@@ -158,7 +158,7 @@ All benchmark model downloads require a login (using the username "Guest" and th
 Refer to [Installation of V2X-R](INSTALL.md)
 
 
-### Train model 
+### Train benchmark model 
 First of all, modify the dataset path in the setting file (**root_dir**, **validate_dir**), i.e. `xxx.yaml`.
 
 The setting is same as OpenCOOD, which uses yaml file to configure all the parameters for training. To train your own model from scratch or a continued checkpoint, run the following commonds:
@@ -210,7 +210,19 @@ CUDA_VISIBLE_DEVICES=0 python opencood/tools/inference.py --hypes_yaml opencood/
 ```
 The evaluation results  will be dumped in the model directory.
 
+### Train model with Multi-modal Diffusion Denoising (MDD) module 
+Our MDD module code is done on top of [DiffusionMTL](https://github.com/prismformore/DiffusionMTL) and [WeatherDiffusion](https://github.com/IGITUGraz/WeatherDiffusion/blob/main/utils/sampling.py)
+. The relevant code section about our MDD module can be found in [here](opencood/models/mdd_modules).
 
+To embed the MDD module in the model, change the following in the yaml file of the original model:
+1. add use_DeLidar=True
+2. rewrite core_method to be the version that adds the MDD module, for example.
+3. add mdd_block to the model's args and set the parameters in it (see [example_yaml](opencood/hypes_yaml/V2X-R/L_4DR_Fusion_with_MDD/V2XR_AttFuse.yaml) for details)
+
+For example, to train V2XR_AttFuse (LiDAR-4D radar fusion version, 4 GPUs) from scratch with MDD:
+```
+CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4  --use_env opencood/tools/train.py --hypes_yaml opencood/hypes_yaml/V2X-R/L_4DR_Fusion_with_MDD/V2XR_AttFuse.yaml --tag 'demo' --worker 16
+```
 
 ## Citation
 If you are using our project for your research, please cite the following paper:
@@ -226,6 +238,8 @@ If you are using our project for your research, please cite the following paper:
 
 ## Acknowledgements
 Thank for the excellent cooperative perception codebases  [BM2CP](https://github.com/byzhaoAI/BM2CP), [OpenCOOD](https://github.com/DerrickXuNu/OpenCOOD), [CoPerception](https://github.com/coperception/coperception) and [Where2comm](https://github.com/MediaBrain-SJTU/Where2comm).
+
+Thank for the excellent diffusion works [DiffusionMTL](https://github.com/prismformore/DiffusionMTL) and [WeatherDiffusion](https://github.com/IGITUGraz/WeatherDiffusion/blob/main/utils/sampling.py)
 
 Thank for the excellent cooperative perception dataset [OPV2V](https://mobility-lab.seas.ucla.edu/opv2v/).
 
