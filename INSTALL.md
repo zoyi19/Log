@@ -15,28 +15,6 @@ conda install boost
 pip install torch==1.10.1+cu111 torchvision==0.11.2+cu111 torchaudio==0.10.1 -f https://download.pytorch.org/whl/torch_stable.html
 ```
 
-### *(Option) If there is error or speed issues in install cudatoolkit
-```
-# could instead specify the PATH, CUDA_HOME, and LD_LIBRARY_PATH, using current cuda write it to ~/.bashrc, for example use Vim
-vim ~/.bashrc
-export PATH=/usr/local/cuda/bin:$PATH
-export CUDA_HOME=/usr/local/cuda/bin:$CUDA_HOME
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
-
-# add head file search directories 
-export C_INCLUDE_PATH=$C_INCLUDE_PATH:/Anaconda3/envs/bm2cp/include
-export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/Anaconda3/envs/bm2cp/include
-# add shared library searching directories
-export LIBRARY_PATH=$LIBRARY_PATH:/Anaconda3/envs/bm2cp/lib
-# add runtime library searching directories
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/Anaconda3/envs/bm2cp/lib
-
-# go out of Vim and activate it in current shell
-source ~/.bashrc
-
-conda activate bm2cp
-```
-
 ## 3. Install spconv (Support both 1.2.1 and 2.x)
 
 ### *(Notice): Make sure *libboost-all-dev* is installed in your linux system before installing *spconv*. If not:
