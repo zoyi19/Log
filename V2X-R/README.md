@@ -1,9 +1,4 @@
 
-## Overview
-Thanks to the contributions to [OpenCood](https://github.com/DerrickXuNu/OpenCOOD) and [BM2CP](https://github.com/byzhaoAI/BM2CP), this repository is proposed to be built on the basis of the two repositories mentioned above.
-
-### Why Need?
-This repo is a unified and integrated multi-agent collaborative perception framework for **LiDAR-based**, **4D radar-based**, **LiDAR-4D radar fusion** strategies!
 
 
 ## Get Started
