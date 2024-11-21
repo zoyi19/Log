@@ -43,7 +43,7 @@ This repo is also a unified and integrated multi-agent collaborative perception 
     - [x] [L4DR (Arxiv2024)](https://arxiv.org/abs/2408.03677)
     - [x] [SICP (IROS2024)](https://arxiv.org/abs/2312.04822)
 
-- Visualization
+- :sparkles: Visualization
   - [x] BEV visualization
   - [x] 3D visualization
 
@@ -153,8 +153,63 @@ All benchmark model downloads require a login (using the username "Guest" and th
 |      [IROS2024:SICP](https://arxiv.org/abs/2312.04822)     |         82.46/79.44/61.51        |       86.19/84.20/68.15       |      [√](V2X-R/opencood/hypes_yaml/V2X-R/L_4DR_Fusion/V2XR_Sicp.yaml)     | [model-28M](http://39.98.109.195:1000/files/V2X-R_Dataset(compressed)/benchmark/l+r) |
 
 ## :balloon: Quickly Get Started
-Thanks to the contributions to [OpenCood](https://github.com/DerrickXuNu/OpenCOOD) and [BM2CP](https://github.com/byzhaoAI/BM2CP), this repository is proposed to be built on the basis of the two repositories mentioned above.
 
 ### Installation
 Refer to [Installation of V2X-R](V2X-R/README.md)
 
+
+### Train your model
+First of all, modify the dataset path in the setting file, i.e. `xxx.yaml`.
+
+The setting is same as OpenCOOD, which uses yaml file to configure all the parameters for training. To train your own model from scratch or a continued checkpoint, run the following commonds:
+```python
+python opencood/tools/train.py --hypes_yaml ${CONFIG_FILE} [--model_dir  ${CHECKPOINT_FOLDER}]
+```
+Arguments Explanation:
+- `hypes_yaml`: the path of the training configuration file, e.g. `opencood/hypes_yaml/second_early_fusion.yaml`, meaning you want to train
+an early fusion model which utilizes SECOND as the backbone. See [Tutorial 1: Config System](https://opencood.readthedocs.io/en/latest/md_files/config_tutorial.html) to learn more about the rules of the yaml files.
+- `model_dir` (optional) : the path of the checkpoints. This is used to fine-tune the trained models. When the `model_dir` is given, the trainer will discard the `hypes_yaml` and load the `config.yaml` in the checkpoint folder.
+
+For example, to train BM2CP from scratch:
+```
+python opencood/tools/train.py --hypes_yaml opencood/hypes_yaml/dair-v2x/dair_bm2cp.yaml
+```
+
+To train BM2CP from a checkpoint:
+```
+python opencood/tools/train.py --hypes_yaml opencood/hypes_yaml/dair-v2x/dair_bm2cp.yaml --model_dir opencood/logs/dair_bm2cp_2023_11_28_08_52_46
+```
+
+#### Test the model
+Before you run the following command, first make sure the `validation_dir` in config.yaml under your checkpoint folder
+refers to the testing dataset path, e.g. `opv2v_data_dumping/test`.
+
+```python
+python opencood/tools/inference.py --model_dir ${CHECKPOINT_FOLDER} --fusion_method ${FUSION_STRATEGY} --eval_epoch ${epoch_number} --save_vis ${default False}
+```
+Arguments Explanation:
+- `model_dir`: the path to your saved model.
+- `fusion_method`: indicate the fusion strategy, currently support 'early', 'late', 'intermediate', 'no'(indicate no fusion, single agent), 'intermediate_with_comm'(adopt intermediate fusion and output the communication cost).
+- `eval_epoch`: int. Choose to inferece which epoch.
+- `save_vis`: bool. Wether to save the visualization result.
+
+The evaluation results  will be dumped in the model directory.
+
+## Citation
+If you are using our project for your research, please cite the following paper:
+
+```
+@article{V2X-R,
+  title={V2X-R: Cooperative LiDAR-4D Radar Fusion for 3D Object Detection with Denoising Diffusion},
+  author={Huang, Xun and Wang, Jinlong and Xia, Qiming and Chen, Siheng and Yang, Bisheng and Wang, Cheng and Wen, Chenglu},
+  journal={arXiv preprint arXiv:2411.08402},
+  year={2024}
+}
+```
+
+## Acknowledgements
+Thank for the excellent cooperative perception codebases  [BM2CP](https://github.com/byzhaoAI/BM2CP), [OpenCOOD](https://github.com/DerrickXuNu/OpenCOOD), [CoPerception](https://github.com/coperception/coperception) and [Where2comm](https://github.com/MediaBrain-SJTU/Where2comm).
+
+Thank for the excellent cooperative perception dataset [OPV2V](https://mobility-lab.seas.ucla.edu/opv2v/).
+
+Thank for the dataset and code support by [DerrickXu](https://github.com/DerrickXuNu) and [ZhaoAI](https://github.com/byzhaoAI).
