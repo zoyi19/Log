@@ -2,11 +2,8 @@
 ## Overview
 Thanks to the contributions to [OpenCood](https://github.com/DerrickXuNu/OpenCOOD) and [BM2CP](https://github.com/byzhaoAI/BM2CP), this repository is proposed to be built on the basis of the two repositories mentioned above.
 
-## Updates
-- 2024/04/29 Support BM2CP in OPV2V dataset.
-- 2024/03/12 Support How2comm(NeurIPS2023).
-- 2024/01/28 Support OPV2V dataset. Support SCOPE(ICCV2023). Fix bugs in fusion dataset that cause abnormal performance in presence of pose error. 
-- 2023/11/30 First version.
+## Why Need?
+This repo is a unified and integrated multi-agent collaborative perception framework for LiDAR-based, 4D radar-based, LiDAR-4D radar fusion strategies!
 
 
 ## Features
