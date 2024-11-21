@@ -85,7 +85,7 @@ sh setup.sh
 ### if there is a problem about cv2:
 ```
 # module 'cv2' has no attribute 'gapi_wip_gst_GStreamerPipeline'
-pip install opencv-python install "opencv-python-headless<4.3"
+pip install "opencv-python-headless<4.3"
 ```
 
 
