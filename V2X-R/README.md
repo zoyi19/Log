@@ -1,16 +1,12 @@
 
-
-
-## Get Started
-
-### Install
-#### 1. Clone (or download) the source code 
+# Install
+## 1. Clone (or download) the source code 
 ```
 git clone https://github.com/ylwhxht/V2X-R.git
 cd V2X-R/V2X-R
 ```
  
-#### 2. Create conda environment and set up the base dependencies
+## 2. Create conda environment and set up the base dependencies
 ```
 conda create --name v2xr python=3.7 cmake=3.22.1
 conda activate v2xr
@@ -19,7 +15,7 @@ conda install boost
 pip install torch==1.10.1+cu111 torchvision==0.11.2+cu111 torchaudio==0.10.1 -f https://download.pytorch.org/whl/torch_stable.html
 ```
 
-##### *(Option) If there is error or speed issues in install cudatoolkit
+### *(Option) If there is error or speed issues in install cudatoolkit
 ```
 # could instead specify the PATH, CUDA_HOME, and LD_LIBRARY_PATH, using current cuda write it to ~/.bashrc, for example use Vim
 vim ~/.bashrc
@@ -41,19 +37,19 @@ source ~/.bashrc
 conda activate bm2cp
 ```
 
-### 3. Install spconv (Support both 1.2.1 and 2.x)
+## 3. Install spconv (Support both 1.2.1 and 2.x)
 
-##### *(Notice): Make sure *libboost-all-dev* is installed in your linux system before installing *spconv*. If not:
+### *(Notice): Make sure *libboost-all-dev* is installed in your linux system before installing *spconv*. If not:
 ```
 sudo apt-get install libboost-all-dev
 ```
 
-##### Install 2.x
+## Install 2.x
 ```
 pip install spconv-cu113
 ```
 
-### 4. Install pypcd
+## 4. Install pypcd
 ```
 git clone https://github.com/klintan/pypcd.git
 cd pypcd
@@ -62,7 +58,7 @@ python setup.py install
 cd ..
 ```
 
-### 5. Install V2XR
+## 5. Install V2XR
 ```
 # install requirements
 pip install -r requirements.txt
@@ -75,7 +71,7 @@ python opencood/utils/setup.py build_ext --inplace
 python opencood/pcdet_utils/setup.py build_ext --inplace
 ```
 
-### 6. *(Option) for training and testing SCOPE&How2comm
+## 6. *(Option) for training and testing SCOPE&How2comm
 ```
 # install basic library of deformable attention
 git clone https://github.com/TuSimple/centerformer.git
@@ -86,7 +82,7 @@ pip install -r requirements.txt
 sh setup.sh
 ```
 
-##### if there is a problem about cv2:
+### if there is a problem about cv2:
 ```
 # module 'cv2' has no attribute 'gapi_wip_gst_GStreamerPipeline'
 pip install opencv-python install "opencv-python-headless<4.3"
