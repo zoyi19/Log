@@ -10,7 +10,42 @@
 ## :balloon: Introduction
 :wave: This is the official repository for the V2X-R, including the V2X-R dataset and the implementation of the benchmark model, and MDD module. 
 
-This also is a reference code repository for LiDAR-4D radar fusion in the cooperative perception.
+This repo is also a unified and integrated multi-agent collaborative perception framework for **LiDAR-based**, **4D radar-based**, **LiDAR-4D radar fusion** strategies!
+
+### Features
+
+- :sparkles: Dataset Support
+  - [x] V2X-R
+  - [x] OPV2V
+  - [x] DAIR-V2X
+
+- :sparkles: Modality Support
+  - [x] LiDAR
+  - [x] 4D Radar
+  - [x] LiDAR-4D Radar Fusion
+    
+- :sparkles: SOTA collaborative perception method support
+    - [x] Late Fusion
+    - [x] Early Fusion
+    - [x] [When2com (CVPR2020)](https://arxiv.org/abs/2006.00176)
+    - [x] [V2VNet (ECCV2020)](https://arxiv.org/abs/2008.07519)
+    - [x] [PFA-Net (ITSC2021)](https://ieeexplore.ieee.org/abstract/document/9564754)
+    - [x] [RTNH (NIPS2022)](https://arxiv.org/abs/2206.08171)
+    - [x] [DiscoNet (NeurIPS2021)](https://arxiv.org/abs/2111.00643)
+    - [x] [V2X-ViT (ECCV2022)](https://arxiv.org/abs/2203.10638)
+    - [x] [CoBEVT (CoRL2022)](https://arxiv.org/abs/2207.02202)
+    - [x] [Where2comm (NeurIPS2022)](https://arxiv.org/abs/2209.12836)
+    - [x] [CoAlign (ICRA2023)](https://arxiv.org/abs/2211.07214)
+    - [x] [BM2CP (CoRL2023)](https://arxiv.org/abs/2310.14702)
+    - [x] [SCOPE (ICCV2023)](https://arxiv.org/abs/2307.13929)
+    - [x] [How2comm (NeurIPS2023)](https://openreview.net/pdf?id=Dbaxm9ujq6)
+    - [x] [InterFusion (IROS2023)](https://ieeexplore.ieee.org/document/9982123)
+    - [x] [L4DR (Arxiv2024)](https://arxiv.org/abs/2408.03677)
+    - [x] [SICP (IROS2024)](https://arxiv.org/abs/2312.04822)
+
+- Visualization
+  - [x] BEV visualization
+  - [x] 3D visualization
 
 ## :balloon: V2X-R Dataset Manual 
 The first V2X dataset incorporates LiDAR, camera, and **4D radar**. V2X-R contains **12,079 scenarios** with **37,727 frames of LiDAR and 4D radar point clouds**, **150,908 images**, and **170,859 annotated 3D vehicle bounding boxes**.
