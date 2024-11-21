@@ -6,46 +6,96 @@ Thanks to the contributions to [OpenCood](https://github.com/DerrickXuNu/OpenCOO
 This repo is a unified and integrated multi-agent collaborative perception framework for **LiDAR-based**, **4D radar-based**, **LiDAR-4D radar fusion** strategies!
 
 
-### Features
-
-- Dataset Support
-  - [x] V2X-R
-  - [x] OPV2V
-  - [x] DAIR-V2X
-
-- Modality Support
-  - [x] LiDAR
-  - [x] 4D Radar
-  - [x] LiDAR-4D Radar Fusion
-    
-- SOTA collaborative perception method support
-    - [x] Late Fusion
-    - [x] Early Fusion
-    - [x] [When2com (CVPR2020)](https://arxiv.org/abs/2006.00176)
-    - [x] [V2VNet (ECCV2020)](https://arxiv.org/abs/2008.07519)
-    - [x] [PFA-Net (ITSC2021)](https://ieeexplore.ieee.org/abstract/document/9564754)
-    - [x] [RTNH (NIPS2022)](https://arxiv.org/abs/2206.08171)
-    - [x] [DiscoNet (NeurIPS2021)](https://arxiv.org/abs/2111.00643)
-    - [x] [V2X-ViT (ECCV2022)](https://arxiv.org/abs/2203.10638)
-    - [x] [CoBEVT (CoRL2022)](https://arxiv.org/abs/2207.02202)
-    - [x] [Where2comm (NeurIPS2022)](https://arxiv.org/abs/2209.12836)
-    - [x] [CoAlign (ICRA2023)](https://arxiv.org/abs/2211.07214)
-    - [x] [BM2CP (CoRL2023)](https://arxiv.org/abs/2310.14702)
-    - [x] [SCOPE (ICCV2023)](https://arxiv.org/abs/2307.13929)
-    - [x] [How2comm (NeurIPS2023)](https://openreview.net/pdf?id=Dbaxm9ujq6)
-    - [x] [InterFusion (IROS2023)](https://ieeexplore.ieee.org/document/9982123)
-    - [x] [L4DR (Arxiv2024)](https://arxiv.org/abs/2408.03677)
-    - [x] [SICP (IROS2024)](https://arxiv.org/abs/2312.04822)
-
-- Visualization
-  - [x] BEV visualization
-  - [x] 3D visualization
-
-
 ## Get Started
 
-#### Install
-Please refer to the [INSTALL.md](./INSTALL.md) for detailed documentations. 
+### Install
+#### 1. Clone (or download) the source code 
+```
+git clone https://github.com/ylwhxht/V2X-R.git
+cd V2X-R/V2X-R
+```
+ 
+#### 2. Create conda environment and set up the base dependencies
+```
+conda create --name v2xr python=3.7 cmake=3.22.1
+conda activate v2xr
+conda install cudnn -c conda-forge
+conda install boost
+pip install torch==1.10.1+cu111 torchvision==0.11.2+cu111 torchaudio==0.10.1 -f https://download.pytorch.org/whl/torch_stable.html
+```
+
+##### *(Option) If there is error or speed issues in install cudatoolkit
+```
+# could instead specify the PATH, CUDA_HOME, and LD_LIBRARY_PATH, using current cuda write it to ~/.bashrc, for example use Vim
+vim ~/.bashrc
+export PATH=/usr/local/cuda/bin:$PATH
+export CUDA_HOME=/usr/local/cuda/bin:$CUDA_HOME
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+
+# add head file search directories 
+export C_INCLUDE_PATH=$C_INCLUDE_PATH:/Anaconda3/envs/bm2cp/include
+export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/Anaconda3/envs/bm2cp/include
+# add shared library searching directories
+export LIBRARY_PATH=$LIBRARY_PATH:/Anaconda3/envs/bm2cp/lib
+# add runtime library searching directories
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/Anaconda3/envs/bm2cp/lib
+
+# go out of Vim and activate it in current shell
+source ~/.bashrc
+
+conda activate bm2cp
+```
+
+### 3. Install spconv (Support both 1.2.1 and 2.x)
+
+##### *(Notice): Make sure *libboost-all-dev* is installed in your linux system before installing *spconv*. If not:
+```
+sudo apt-get install libboost-all-dev
+```
+
+##### Install 2.x
+```
+pip install spconv-cu113
+```
+
+### 4. Install pypcd
+```
+git clone https://github.com/klintan/pypcd.git
+cd pypcd
+pip install python-lzf
+python setup.py install
+cd ..
+```
+
+### 5. Install V2XR
+```
+# install requirements
+pip install -r requirements.txt
+python setup.py develop
+
+# Bbx IOU cuda version compile
+python opencood/utils/setup.py build_ext --inplace
+
+# FPVRCNN's iou_loss dependency (optional)
+python opencood/pcdet_utils/setup.py build_ext --inplace
+```
+
+### 6. *(Option) for training and testing SCOPE&How2comm
+```
+# install basic library of deformable attention
+git clone https://github.com/TuSimple/centerformer.git
+cd centerformer
+
+# install requirements
+pip install -r requirements.txt
+sh setup.sh
+```
+
+##### if there is a problem about cv2:
+```
+# module 'cv2' has no attribute 'gapi_wip_gst_GStreamerPipeline'
+pip install opencv-python install "opencv-python-headless<4.3"
+```
 
 
 #### Train your model
