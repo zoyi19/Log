@@ -153,4 +153,8 @@ All benchmark model downloads require a login (using the username "Guest" and th
 |      [IROS2024:SICP](https://arxiv.org/abs/2312.04822)     |         82.46/79.44/61.51        |       86.19/84.20/68.15       |      [√](V2X-R/opencood/hypes_yaml/V2X-R/L_4DR_Fusion/V2XR_Sicp.yaml)     | [model-28M](http://39.98.109.195:1000/files/V2X-R_Dataset(compressed)/benchmark/l+r) |
 
 ## :balloon: Quickly Get Started
-For installation, model training/testing, and use of the MDD module refer to [document](V2X-R/README.md)
+Thanks to the contributions to [OpenCood](https://github.com/DerrickXuNu/OpenCOOD) and [BM2CP](https://github.com/byzhaoAI/BM2CP), this repository is proposed to be built on the basis of the two repositories mentioned above.
+
+### Installation
+Refer to [Installation of V2X-R](V2X-R/README.md)
+
