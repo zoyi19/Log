@@ -163,32 +163,37 @@ First of all, modify the dataset path in the setting file (**root_dir**, **valid
 
 The setting is same as OpenCOOD, which uses yaml file to configure all the parameters for training. To train your own model from scratch or a continued checkpoint, run the following commonds:
 ```python
-python opencood/tools/train.py --hypes_yaml ${CONFIG_FILE} [--model_dir  ${CHECKPOINT_FOLDER}]
+training command --hypes_yaml ${CONFIG_FILE} [--model_dir  ${CHECKPOINT_FOLDER}] [--tag  ${train_tag}] [--worker  ${number}]
 ```
 Arguments Explanation:
 - `hypes_yaml`: the path of the training configuration file, e.g. `opencood/hypes_yaml/second_early_fusion.yaml`, meaning you want to train
 an early fusion model which utilizes SECOND as the backbone. See [Tutorial 1: Config System](https://opencood.readthedocs.io/en/latest/md_files/config_tutorial.html) to learn more about the rules of the yaml files.
 - `model_dir` (optional) : the path of the checkpoints. This is used to fine-tune the trained models. When the `model_dir` is given, the trainer will discard the `hypes_yaml` and load the `config.yaml` in the checkpoint folder.
+- `tag` (optional) : the path of the checkpoints. The training label is used to record additional information about the model being trained, with the default setting being 'default'.
+- `worker` (optional) : the number of workers in dataloader, default is 16.
 
 
 #### Training with single-GPU
+For example, to train V2XR_AttFuse (LiDAR-4D radar fusion version) from scratch:
+```
+CUDA_VISIBLE_DEVICES=0 python opencood/tools/train.py --hypes_yaml opencood/hypes_yaml/V2X-R/L_4DR_Fusion/V2XR_AttFuse.yaml --tag 'demo' --worker 16
+```
+
+To train V2XR_AttFuse from a checkpoint:
+```
+CUDA_VISIBLE_DEVICES=0 python opencood/tools/train.py --hypes_yaml opencood/hypes_yaml/V2X-R/L_4DR_Fusion/V2XR_AttFuse.yaml --model_dir opencood/logs/V2XR_AttFuse/test__2024_11_21_16_40_38 --tag 'demo' --worker 16
+```
 
 #### Training with distributed multi-GPUs
+For example, to train V2XR_AttFuse (LiDAR-4D radar fusion version) from scratch with 4 GPUs:
+```
+CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4  --use_env opencood/tools/train.py --hypes_yaml opencood/hypes_yaml/V2X-R/L_4DR_Fusion/V2XR_AttFuse.yaml --tag 'demo' --worker 16
+```
 
-For example, to train BM2CP from scratch:
-```
-python opencood/tools/train.py --hypes_yaml opencood/hypes_yaml/dair-v2x/dair_bm2cp.yaml
-```
-
-To train BM2CP from a checkpoint:
-```
-python opencood/tools/train.py --hypes_yaml opencood/hypes_yaml/dair-v2x/dair_bm2cp.yaml --model_dir opencood/logs/dair_bm2cp_2023_11_28_08_52_46
-```
 
 
 #### Test the model
 Before you run the following command, first make sure the `validation_dir` in config.yaml under your checkpoint folder
-refers to the testing dataset path, e.g. `opv2v_data_dumping/test`.
 
 ```python
 python opencood/tools/inference.py --model_dir ${CHECKPOINT_FOLDER} --fusion_method ${FUSION_STRATEGY} --eval_epoch ${epoch_number} --save_vis ${default False}
@@ -199,7 +204,13 @@ Arguments Explanation:
 - `eval_epoch`: int. Choose to inferece which epoch.
 - `save_vis`: bool. Wether to save the visualization result.
 
+For example, to test V2XR_AttFuse (LiDAR-4D radar fusion version) from scratch:
+```
+CUDA_VISIBLE_DEVICES=0 python opencood/tools/inference.py --hypes_yaml opencood/hypes_yaml/V2X-R/L_4DR_Fusion/V2XR_AttFuse.yaml --model_dir opencood/logs/V2XR_AttFuse/test__2024_11_21_16_40_38
+```
 The evaluation results  will be dumped in the model directory.
+
+
 
 ## Citation
 If you are using our project for your research, please cite the following paper:
