@@ -138,7 +138,7 @@ All benchmark model downloads require a login (using the username "Guest" and th
 | [WACV2024:MACP](https://openaccess.thecvf.com/content/WACV2024/html/Ma_MACP_Efficient_Model_Adaptation_for_Cooperative_Perception_WACV_2024_paper.html)                  | 72.80/70.90/60.00                | 83.70/83.10/75.50             |      soon     | [model-61M](http://39.98.109.195:1000/files/V2X-R_Dataset(compressed)/benchmark/lidar) |
 
 
-### LiDAR-4D Radar based Cooperative 3D Detector (no-compression)
+### LiDAR-4D Radar Fusion Cooperative 3D Detector (no-compression)
 |       **Method**       | **Validation (IoU=0.3/0.5/0.7)** | **Testing (IoU=0.3/0.5/0.7)** | **Config** |  **Model**  |
 |:----------------------:|:--------------------------------:|:-----------------------------:|:----------:|:-----------:|
 |  [IROS2023:InterFusion](https://ieeexplore.ieee.org/document/9982123)  |         81.23/77.33/52.93        |       87.91/86.51/69.63       |      [√](V2X-R/opencood/hypes_yaml/V2X-R/L_4DR_Fusion/V2XR_InterFusion.yaml)     | [model-95M](http://39.98.109.195:1000/files/V2X-R_Dataset(compressed)/benchmark/l+r) |
