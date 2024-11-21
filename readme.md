@@ -158,7 +158,7 @@ All benchmark model downloads require a login (using the username "Guest" and th
 Refer to [Installation of V2X-R](V2X-R/README.md)
 
 
-### Train your model
+### Train model 
 First of all, modify the dataset path in the setting file, i.e. `xxx.yaml`.
 
 The setting is same as OpenCOOD, which uses yaml file to configure all the parameters for training. To train your own model from scratch or a continued checkpoint, run the following commonds:
@@ -170,6 +170,11 @@ Arguments Explanation:
 an early fusion model which utilizes SECOND as the backbone. See [Tutorial 1: Config System](https://opencood.readthedocs.io/en/latest/md_files/config_tutorial.html) to learn more about the rules of the yaml files.
 - `model_dir` (optional) : the path of the checkpoints. This is used to fine-tune the trained models. When the `model_dir` is given, the trainer will discard the `hypes_yaml` and load the `config.yaml` in the checkpoint folder.
 
+
+#### Training with single-GPU
+
+#### Training with distributed multi-GPUs
+
 For example, to train BM2CP from scratch:
 ```
 python opencood/tools/train.py --hypes_yaml opencood/hypes_yaml/dair-v2x/dair_bm2cp.yaml
@@ -179,6 +184,7 @@ To train BM2CP from a checkpoint:
 ```
 python opencood/tools/train.py --hypes_yaml opencood/hypes_yaml/dair-v2x/dair_bm2cp.yaml --model_dir opencood/logs/dair_bm2cp_2023_11_28_08_52_46
 ```
+
 
 #### Test the model
 Before you run the following command, first make sure the `validation_dir` in config.yaml under your checkpoint folder
