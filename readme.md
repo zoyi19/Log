@@ -159,7 +159,7 @@ Refer to [Installation of V2X-R](V2X-R/README.md)
 
 
 ### Train model 
-First of all, modify the dataset path in the setting file, i.e. `xxx.yaml`.
+First of all, modify the dataset path in the setting file (**root_dir**, **validate_dir**), i.e. `xxx.yaml`.
 
 The setting is same as OpenCOOD, which uses yaml file to configure all the parameters for training. To train your own model from scratch or a continued checkpoint, run the following commonds:
 ```python
