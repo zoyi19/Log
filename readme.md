@@ -215,9 +215,9 @@ Our MDD module code is done on top of [DiffusionMTL](https://github.com/prismfor
 . The relevant code section about our MDD module can be found in [here](opencood/models/mdd_modules).
 
 To embed the MDD module in the model, change the following in the yaml file of the original model:
-1. add use_DeLidar=True
-2. rewrite core_method to be the version that adds the MDD module, for example.
-3. add mdd_block to the model's args and set the parameters in it (see [example_yaml](opencood/hypes_yaml/V2X-R/L_4DR_Fusion_with_MDD/V2XR_AttFuse.yaml) for details)
+- add use_DeLidar=True
+- rewrite core_method to be the version that adds the MDD module, for [example](opencood/models/point_pillar_intermediate_lrf_MDD).
+- add mdd_block to the model's args and set the parameters in it (see [example_yaml](opencood/hypes_yaml/V2X-R/L_4DR_Fusion_with_MDD/V2XR_AttFuse.yaml) for details)
 
 For example, to train V2XR_AttFuse (LiDAR-4D radar fusion version, 4 GPUs) from scratch with MDD:
 ```
