@@ -1,10 +1,6 @@
-# BM2CP
-[CoRL 2023] BM2CP: Efficient Collaborative Perception with LiDAR-Camera Modalities
 
 ## Overview
-![Where2comm](./images/Workflow.png)
-**Abstract:** Collaborative perception enables agents to share complementary perceptual information with nearby agents. This can significantly benefit the perception performance and alleviate the issues of single-view perception, such as occlusion and sparsity. Most proposed approaches mainly focus on single modality (especially LiDAR), and not fully exploit the superiority of multi-modal perception. We propose an collaborative perception paradigm, BM2CP, which employs LiDAR and camera to achieve efficient multi-modal perception. BM2CP utilizes LiDAR-guided modal fusion, cooperative depth generation and modality-guided intermediate fusion to acquire deep interactions between modalities and agents. Moreover, it is capable to cope with the special case that one of the sensors is unavailable. Extensive experiments validate that it outperforms the state-of-the-art methods with 50X lower communication volumes in real-world autonomous driving scenarios.
-
+Thanks to the contributions to [OpenCood](https://github.com/DerrickXuNu/OpenCOOD) and [BM2CP](https://github.com/byzhaoAI/BM2CP), this repository is proposed to be built on the basis of the two repositories mentioned above.
 
 ## Updates
 - 2024/04/29 Support BM2CP in OPV2V dataset.
