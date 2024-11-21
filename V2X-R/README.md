@@ -2,27 +2,29 @@
 ## Overview
 Thanks to the contributions to [OpenCood](https://github.com/DerrickXuNu/OpenCOOD) and [BM2CP](https://github.com/byzhaoAI/BM2CP), this repository is proposed to be built on the basis of the two repositories mentioned above.
 
-## Why Need?
-This repo is a unified and integrated multi-agent collaborative perception framework for LiDAR-based, 4D radar-based, LiDAR-4D radar fusion strategies!
+### Why Need?
+This repo is a unified and integrated multi-agent collaborative perception framework for **LiDAR-based**, **4D radar-based**, **LiDAR-4D radar fusion** strategies!
 
 
-## Features
+### Features
 
 - Dataset Support
+  - [x] V2X-R
   - [x] OPV2V
-  - [ ] V2XSet
-  - [ ] V2X-Sim 2.0
   - [x] DAIR-V2X
 
-- Spconv Support
-  - [x] 1.2.1
-  - [x] 2.x
-
+- Modality Support
+  - [x] LiDAR
+  - [x] 4D Radar
+  - [x] LiDAR-4D Radar Fusion
+    
 - SOTA collaborative perception method support
     - [x] Late Fusion
     - [x] Early Fusion
     - [x] [When2com (CVPR2020)](https://arxiv.org/abs/2006.00176)
     - [x] [V2VNet (ECCV2020)](https://arxiv.org/abs/2008.07519)
+    - [x] [PFA-Net (ITSC2021)](https://ieeexplore.ieee.org/abstract/document/9564754)
+    - [x] [RTNH (NIPS2022)](https://arxiv.org/abs/2206.08171)
     - [x] [DiscoNet (NeurIPS2021)](https://arxiv.org/abs/2111.00643)
     - [x] [V2X-ViT (ECCV2022)](https://arxiv.org/abs/2203.10638)
     - [x] [CoBEVT (CoRL2022)](https://arxiv.org/abs/2207.02202)
@@ -31,19 +33,16 @@ This repo is a unified and integrated multi-agent collaborative perception frame
     - [x] [BM2CP (CoRL2023)](https://arxiv.org/abs/2310.14702)
     - [x] [SCOPE (ICCV2023)](https://arxiv.org/abs/2307.13929)
     - [x] [How2comm (NeurIPS2023)](https://openreview.net/pdf?id=Dbaxm9ujq6)
+    - [x] [InterFusion (IROS2023)](https://ieeexplore.ieee.org/document/9982123)
+    - [x] [L4DR (Arxiv2024)](https://arxiv.org/abs/2408.03677)
+    - [x] [SICP (IROS2024)](https://arxiv.org/abs/2312.04822)
 
 - Visualization
   - [x] BEV visualization
   - [x] 3D visualization
 
 
-## Quick Start
-#### Download dataset 
-##### 1. OPV2V
-Download raw data of [OPV2V](https://drive.google.com/drive/folders/1dkDeHlwOVbmgXcDazZvO6TFEZ6V_7WUu) relseased by Official.
-##### 2. DAIR-V2X
-1. Download raw data of [DAIR-V2X](https://thudair.baai.ac.cn/cooptest).
-2. Download complemented annotation from [Yifan Lu](https://github.com/yifanlu0227/CoAlign).
+## Get Started
 
 #### Install
 Please refer to the [INSTALL.md](./INSTALL.md) for detailed documentations. 
