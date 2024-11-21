@@ -3,7 +3,7 @@
 ## 1. Clone (or download) the source code 
 ```
 git clone https://github.com/ylwhxht/V2X-R.git
-cd V2X-R/V2X-R
+cd V2X-R
 ```
  
 ## 2. Create conda environment and set up the base dependencies
