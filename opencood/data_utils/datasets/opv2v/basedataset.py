@@ -66,18 +66,8 @@ class BaseDataset(Dataset):
         self.visualize = visualize
         self.train = train
         self.train_sim = False
-        if 'train_sim' in params:
-            self.train_sim = params['train_sim']
         self.eval_sim = False
-        if 'eval_sim' in params:
-            self.eval_sim = params['eval_sim']
         self.sim_weather = None #_fog_0.060,'_snow_2.5_2.0'
-        if self.eval_sim or self.train_sim:
-            if 'sim_weather' in params:
-                self.sim_weather = params['sim_weather']
-            else:
-                print("Need which weather to simulate")
-                exit()
         self.pre_processor = None
         self.post_processor = None
         self.data_augmentor = DataAugmentor(params['data_augment'],
@@ -188,10 +178,6 @@ class BaseDataset(Dataset):
                                              timestamp + '.yaml')
                     lidar_file = os.path.join(cav_path,
                                               timestamp + '.pcd')
-                    if self.eval_sim and not self.train:
-                            flag=True
-                            lidar_file = os.path.join(cav_path,
-                                                timestamp + self.sim_weather + '.pcd')
                     radar_file = os.path.join(cav_path,
                                               timestamp + '_radar.pcd')
                     camera_files = self.load_camera_files(cav_path, timestamp)
@@ -327,11 +313,6 @@ class BaseDataset(Dataset):
             # data[cav_id]['params']['scenario'] = cav_content[timestamp_key]['scenario']
             # data[cav_id]['params']['timestamp'] = timestamp_key
             lidar_file = cav_content[timestamp_key_delay]['lidar']
-            if self.train_sim and self.train:
-                aug = random.randint(0, 6)
-                if  aug <= 2 :
-                    #print("Use ", self.sim_weather_list[aug], "to train")
-                    lidar_file = lidar_file.replace('.pcd', self.sim_weather + '.pcd')
             data[cav_id]['lidar_np'], label = \
                 pcd_utils.pcd_to_np(lidar_file, get_weather = True)
             data[cav_id]['de_lidar_np'] = data[cav_id]['lidar_np'][label==0]
