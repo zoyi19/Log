@@ -80,7 +80,7 @@ model:
     res_bev_backbone:
       layer_nums: [3, 5, 8]
       layer_strides: [2, 2, 2]
-      num_filters: [128, 128, 256]
+      num_filters: [64, 128, 256]
       upsample_strides: [1, 2, 4]
       num_upsample_filter: [128, 128, 128]
       compression: 0
@@ -88,7 +88,7 @@ model:
     base_bev_backbone:
       layer_nums: [3, 5, 8]
       layer_strides: [2, 2, 2]
-      num_filters: [128, 128, 256]
+      num_filters: [64, 128, 256]
       upsample_strides: [1, 2, 4]
       num_upsample_filter: [128, 128, 128]
       compression: 0
