@@ -17,7 +17,7 @@ train_params:
 fusion:
   core_method: 'IntermediateFusionSicpDatasetV2XR' # LateFusionDataset, EarlyFusionDataset, IntermediateFusionDataset supported
   args:
-    proj_first: false
+    proj_first: true
     use_comm_range_check: false
 
 fusion_model:

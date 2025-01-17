@@ -30,6 +30,7 @@ fusion:
   core_method: 'IntermediateFusionSicpDatasetV2XR' # LateFusionDataset, EarlyFusionDataset, IntermediateFusionDataset supported
   args:
     cur_ego_pose_flag: False
+    proj_first: true
       # when the cur_ego_pose_flag is set to True, there is no time gap
       # between  the time when the LiDAR data is captured by connected
       # agents and when the extracted features are received by
