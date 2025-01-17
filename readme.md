@@ -196,17 +196,16 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node
 Before you run the following command, first make sure the `validation_dir` in config.yaml under your checkpoint folder
 
 ```python
-python opencood/tools/inference.py --model_dir ${CHECKPOINT_FOLDER} --fusion_method ${FUSION_STRATEGY} --eval_epoch ${epoch_number} --save_vis ${default False}
+python opencood/tools/inference.py --model_dir ${CHECKPOINT_FOLDER} --eval_epoch ${epoch_number} --save_vis ${default False}
 ```
 Arguments Explanation:
 - `model_dir`: the path to your saved model.
-- `fusion_method`: indicate the fusion strategy, currently support 'early', 'late', 'intermediate', 'no'(indicate no fusion, single agent), 'intermediate_with_comm'(adopt intermediate fusion and output the communication cost).
 - `eval_epoch`: int. Choose to inferece which epoch.
 - `save_vis`: bool. Wether to save the visualization result.
 
 For example, to test V2XR_AttFuse (LiDAR-4D radar fusion version) from scratch:
 ```
-CUDA_VISIBLE_DEVICES=0 python opencood/tools/inference.py --hypes_yaml opencood/hypes_yaml/V2X-R/L_4DR_Fusion/V2XR_AttFuse.yaml --model_dir opencood/logs/V2XR_AttFuse/test__2024_11_21_16_40_38
+CUDA_VISIBLE_DEVICES=0 python opencood/tools/inference.py --model_dir opencood/logs/V2XR_AttFuse/test__2024_11_21_16_40_38 --eval_epoch 30  --save_vis 1
 ```
 The evaluation results  will be dumped in the model directory.
 
