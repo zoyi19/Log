@@ -21,8 +21,8 @@ sim_weather: '_fog_0.060' #fog_0.060,'_snow_2.5_2.0'
 
 yaml_parser: 'load_point_pillar_params'
 train_params:
-  batch_size: &batch_size 1
-  epoches: &epoches 50
+  batch_size: &batch_size 2
+  epoches: &epoches 20
   eval_freq: 5
   save_freq: 1
   max_cav: &max_cav 5
