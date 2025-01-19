@@ -1,12 +1,14 @@
 name: V2XR_Sicp
 root_dir: '/mnt/ssd8T/Cooperative_Perception/V2X-R/train'
 validate_dir: '/mnt/ssd8T/Cooperative_Perception/V2X-R/validate'
-fov: True
+fov: True #是否开启重叠区域检查
 train_sim: false
 eval_sim: false
 sim_weather: '_fog_0.060' #fog_0.060,'_snow_2.5_2.0'
 
-yaml_parser: "load_point_pillar_params"
+yaml_parser: "load_point_pillar_params" 
+#根据激光雷达范围 (LiDAR range) 和体素分辨率 (voxel resolution) 来计算模型训练和推理所需的锚框参数和目标网格分辨率，
+#并将这些参数更新到原始的参数字典中
 train_params:
   batch_size: &batch_size 1
   epoches: 20
@@ -17,8 +19,8 @@ train_params:
 fusion:
   core_method: 'IntermediateFusionSicpDatasetV2XR' # LateFusionDataset, EarlyFusionDataset, IntermediateFusionDataset supported
   args:
-    proj_first: true
-    use_comm_range_check: false
+    proj_first: true #先将 LiDAR 数据投影到 ego 坐标系。
+    use_comm_range_check: false  #不检查通信范围。
 
 fusion_model:
   sicp: true 
@@ -35,15 +37,15 @@ preprocess:
   # lidar range for each individual cav.
   cav_lidar_range: &cav_lidar [-140.8, -40, -3, 140.8, 40, 1]
 
-data_augment:
+data_augment: #数据增强
   - NAME: random_world_flip
     ALONG_AXIS_LIST: [ 'x' ]
 
   - NAME: random_world_rotation
-    WORLD_ROT_ANGLE: [ -0.78539816, 0.78539816 ]
+    WORLD_ROT_ANGLE: [ -0.78539816, 0.78539816 ] #随机旋转点云，角度范围为 [-π/4, π/4]
 
   - NAME: random_world_scaling
-    WORLD_SCALE_RANGE: [ 0.95, 1.05 ]
+    WORLD_SCALE_RANGE: [ 0.95, 1.05 ] #随机缩放点云
 
 # anchor box related
 postprocess:
@@ -62,7 +64,7 @@ postprocess:
     score_threshold: 0.20
   order: 'hwl' # hwl or lwh
   max_num: 100 # maximum number of objects in a single frame. use this number to make sure different frames has the same dimension in the same batch
-  nms_thresh: 0.15
+  nms_thresh: 0.15 #非极大值抑制阈值
 
 # model related
 model:

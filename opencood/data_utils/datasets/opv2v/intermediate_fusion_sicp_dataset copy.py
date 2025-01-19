@@ -64,7 +64,7 @@ class IntermediateFusionSicpDataset(basedataset.BaseDataset):
             dataset='opv2v', 
             train=train)
 
-        self.use_comm_range_check = True        
+        self.use_comm_range_check = True   #通信范围检查用于筛选出与 Ego 有效通信的车辆。     
         if 'use_comm_range_check' in params['fusion']['args'] and \
             not params['fusion']['args']['use_comm_range_check']:
             self.use_comm_range_check = False
