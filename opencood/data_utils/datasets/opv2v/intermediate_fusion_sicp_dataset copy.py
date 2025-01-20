@@ -72,31 +72,32 @@ class IntermediateFusionSicpDataset(basedataset.BaseDataset):
 
         
     def __getitem__(self, idx):
+        #数据加载
         # base_data_dict = self.retrieve_base_data(idx,
         #                                          cur_ego_pose_flag=self.cur_ego_pose_flag)
         base_data_dict, _, _ = self.retrieve_base_data(idx, cur_ego_pose_flag=self.cur_ego_pose_flag)
-
+        #加载索引的数据，包含场景中各车辆的点云、位置信息。
         processed_data_dict = OrderedDict()
         processed_data_dict['ego'] = {}
 
         ego_id = -1
         ego_lidar_pose = []
 
-        # first find the ego vehicle's lidar pose
-        for cav_id, cav_content in base_data_dict.items():
+        # first find the ego vehicle's lidar pose   
+        for cav_id, cav_content in base_data_dict.items(): #找寻到ego，找到后退出循环
             if cav_content['ego']:
                 ego_id = cav_id
-                ego_lidar_pose = cav_content['params']['lidar_pose']   
+                ego_lidar_pose = cav_content['params']['lidar_pose']   #确定当前场景下Ego车辆的Lidar位姿
                 break        
         assert cav_id == list(base_data_dict.keys())[
             0], "The first element in the OrderedDict must be ego"
-        assert ego_id != -1
+        assert ego_id != -1 #验证ego的存在性和顺序
         assert len(ego_lidar_pose) > 0
        
         pairwise_t_matrix = \
             self.get_pairwise_transformation(base_data_dict,
-                                             self.max_cav)
-  
+                                             self.max_cav) # 计算所有车辆与Ego之间的变换矩阵，用于将点云投影到统一坐标系
+        ''' 上面的代码是将不同agent投影到统一的ego坐标系中,我们已经使用了统一的坐标系,是否这些就不需要了'''
         processed_features = []
         object_stack = []
         object_id_stack = []
@@ -121,9 +122,9 @@ class IntermediateFusionSicpDataset(basedataset.BaseDataset):
                 selected_cav_processed = self.get_item_single_car(
                     selected_cav_base,
                     ego_lidar_pose)
-                object_stack_ego = selected_cav_processed['object_bbx_center']
+                object_stack_ego = selected_cav_processed['object_bbx_center'] #根据当前车辆和自车Lidar，输出ego车辆的边界框信息和物体id
                 object_id_stack_ego = selected_cav_processed['object_ids']
-
+            '''检测通信范围'''
             # check if the cav is within the communication range with ego
             distance = \
                 math.sqrt((selected_cav_base['params']['lidar_pose'][0] -
@@ -132,22 +133,22 @@ class IntermediateFusionSicpDataset(basedataset.BaseDataset):
                                       'lidar_pose'][1] - ego_lidar_pose[
                                       1]) ** 2)
             
-            if self.train:    
+            if self.train:  #通信距离检查，仅处理通信范围内的车辆。   
                 if self.use_comm_range_check:   
                     if distance > opencood.data_utils.datasets.COM_RANGE:
                         continue  
             else:
                 if distance > opencood.data_utils.datasets.COM_RANGE:
                     continue  
-
+            # Project the lidar and bbx to ego space first, and then do clipping.
             selected_cav_processed = self.get_item_single_car(
                 selected_cav_base,
                 ego_lidar_pose)
 
-            object_stack.append(selected_cav_processed['object_bbx_center'])
-            object_id_stack += selected_cav_processed['object_ids']
+            object_stack.append(selected_cav_processed['object_bbx_center'])#当前车辆检查到的目标边界框
+            object_id_stack += selected_cav_processed['object_ids'] #物体id
             processed_features.append(
-                selected_cav_processed['processed_features'])
+                selected_cav_processed['processed_features'])#将当前车辆处理后的特征数据追加到 processed_features 中
 
             velocity.append(selected_cav_processed['velocity'])
             time_delay.append(float(selected_cav_base['time_delay']))
@@ -157,48 +158,49 @@ class IntermediateFusionSicpDataset(basedataset.BaseDataset):
             # their lidar to ego and when the ego receives the feature, and
             # this variable is used to correct such pose difference (ego_t-1 to
             # ego_t)
+            '''我们没有延迟，这里是不是可以直接删掉'''
             spatial_correction_matrix.append(
                 selected_cav_base['params']['spatial_correction_matrix'])
             infra.append(1 if int(cav_id) < 0 else 0)
             
             if self.visualize:
                 projected_lidar_stack.append(
-                    selected_cav_processed['projected_lidar'])
+                    selected_cav_processed['projected_lidar']) #将处理后的投影点云保存到 projected_lidar_stack
 
             # if self.visualize:
             #     if cav_id == ego_id:
             #         projected_lidar_stack.append(
             #             selected_cav_processed['projected_lidar'])
 
-        # exclude all repetitive objects
+        # exclude all repetitive objects 除重
         unique_indices = \
             [object_id_stack.index(x) for x in set(object_id_stack)]
-        object_stack = np.vstack(object_stack)
-        object_stack = object_stack[unique_indices]
+        object_stack = np.vstack(object_stack) #将所有协作车辆检测到的边界框信息按行堆叠为一个二维数组
+        object_stack = object_stack[unique_indices] #按唯一索引提取去重后的边界框
 
-        # make sure bounding boxes across all frames have the same number
+        # make sure bounding boxes across all frames have the same number 确保目标边界框的数量固定
         object_bbx_center = \
             np.zeros((self.params['postprocess']['max_num'], 7))
-        mask = np.zeros(self.params['postprocess']['max_num'])
-        object_bbx_center[:object_stack.shape[0], :] = object_stack
+        mask = np.zeros(self.params['postprocess']['max_num']) #创建一个零向量 mask，用于记录有效的边界框。
+        object_bbx_center[:object_stack.shape[0], :] = object_stack #有效信息填充
         mask[:object_stack.shape[0]] = 1
-
+        #Ego 车辆的边界框标准化
         object_bbx_center_ego = \
             np.zeros((self.params['postprocess']['max_num'], 7))
         mask_ego = np.zeros(self.params['postprocess']['max_num'])
         object_bbx_center_ego[:object_stack_ego.shape[0], :] = object_stack_ego
         mask_ego[:object_stack_ego.shape[0]] = 1
 
-        # merge preprocessed features from different cavs into the same dict
-        cav_num = len(processed_features)
-        merged_feature_dict = self.merge_features_to_dict(processed_features)
+        # merge preprocessed features from different cavs into the same dict 融合所有agent的特征
+        cav_num = len(processed_features) #计算有效CAV数量
+        merged_feature_dict = self.merge_features_to_dict(processed_features) #将不同车辆的特征按照键值对形式合并，输出一个字典
 
-        # generate the anchor boxes
+        # generate the anchor boxes 为整个场景和 Ego 车辆分别生成目标检测所需的锚框
         anchor_box = self.post_processor.generate_anchor_box()
 
         anchor_box_ego = self.post_processor.generate_anchor_box()
 
-        # generate targets label
+        # generate targets label 生成与锚框匹配的目标检测标签
         label_dict = \
             self.post_processor.generate_label(
                 gt_box_center=object_bbx_center,
