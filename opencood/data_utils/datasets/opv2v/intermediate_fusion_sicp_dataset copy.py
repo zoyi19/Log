@@ -215,16 +215,21 @@ class IntermediateFusionSicpDataset(basedataset.BaseDataset):
                 mask=mask_ego)
 
         # pad dv, dt, infra to max_cav
+        #补全速度、时间延迟】基础设施判定（infra_1:ja）
+        velocity = velocity + (self.max_cav - len(velocity)) * [0.]
+        time_delay = time_delay + (self.max_cav - len(time_delay)) * [0.]
+        infra = infra + (self.max_cav - len(infra)) * [0.]
+        spatial_correction_matrix = np.stack(spatial_correction_matrix)#将每辆车的修正矩阵（4x4 齐次变换矩阵）堆叠为一个三维数组。
         velocity = velocity + (self.max_cav - len(velocity)) * [0.]
         time_delay = time_delay + (self.max_cav - len(time_delay)) * [0.]
         infra = infra + (self.max_cav - len(infra)) * [0.]
         spatial_correction_matrix = np.stack(spatial_correction_matrix)
         padding_eye = np.tile(np.eye(4)[None],(self.max_cav - len(
-                                               spatial_correction_matrix),1,1))
+                                               spatial_correction_matrix),1,1))#创建若干个单位矩阵（4x4），用于填充不足的车辆数。
         spatial_correction_matrix = np.concatenate([spatial_correction_matrix,
-                                                   padding_eye], axis=0)
+                                                   padding_eye], axis=0)#将原始修正矩阵和单位矩阵拼接在一起，确保形状为 (max_cav, 4, 4)。
 
-        processed_data_dict['ego'].update(
+        processed_data_dict['ego'].update( #将处理后的所有数据存储到 processed_data_dict['ego']，供后续模块使用。
             {'object_bbx_center': object_bbx_center,
              'object_bbx_mask': mask,
              'object_ids': [object_id_stack[i] for i in unique_indices],
@@ -239,11 +244,12 @@ class IntermediateFusionSicpDataset(basedataset.BaseDataset):
              'spatial_correction_matrix': spatial_correction_matrix,
              'pairwise_t_matrix': pairwise_t_matrix})
 
-        if self.visualize:
+        if self.visualize: #将所有车辆的投影点云堆叠到一起，并存储到 processed_data_dict['ego']['origin_lidar'] 中。
             processed_data_dict['ego'].update({'origin_lidar':
                 np.vstack(
                     projected_lidar_stack)})
         return processed_data_dict
+
 
     def get_item_single_car(self, selected_cav_base, ego_pose):
         """
@@ -260,6 +266,11 @@ class IntermediateFusionSicpDataset(basedataset.BaseDataset):
         -------
         selected_cav_processed : dict
             The dictionary contains the cav's processed information.
+        针对单独的一个cav:
+        将其点云数据投影到 Ego 车辆的坐标系。
+        提取目标物体信息（边界框和 ID).
+        对点云数据进行滤波和体素化预处理。
+        返回包含处理结果的字典.
         """
         selected_cav_processed = {}
 
@@ -276,7 +287,7 @@ class IntermediateFusionSicpDataset(basedataset.BaseDataset):
         lidar_np = selected_cav_base['lidar_np']
         lidar_np = shuffle_points(lidar_np)
         # remove points that hit itself
-        lidar_np = mask_ego_points(lidar_np)
+        lidar_np = mask_ego_points(lidar_np) #过滤掉点云数据中属于车辆自身的部分（通常是 LiDAR 探测到的车体表面点）。
         # project the lidar to ego space
         if self.proj_first:
             lidar_np[:, :3] = \
@@ -285,10 +296,10 @@ class IntermediateFusionSicpDataset(basedataset.BaseDataset):
 
         lidar_np = mask_points_by_range(lidar_np,
                                         self.params['preprocess'][
-                                            'cav_lidar_range'])
+                                            'cav_lidar_range'])#裁剪超过ROI区域的点云
         processed_lidar = self.pre_processor.preprocess(lidar_np)
 
-        # velocity
+        # velocity，速度归一化，便于特征融合时使用
         velocity = selected_cav_base['params']['ego_speed']
         # normalize veloccity by average speed 30 km/h
         velocity = velocity / 30
@@ -307,7 +318,7 @@ class IntermediateFusionSicpDataset(basedataset.BaseDataset):
         """
         Merge the preprocessed features from different cavs to the same
         dictionary.
-
+        将不同CAV的处理后的特征合并到一个字典,以便后续处理
         Parameters
         ----------
         processed_feature_list : list
@@ -334,6 +345,16 @@ class IntermediateFusionSicpDataset(basedataset.BaseDataset):
         return merged_feature_dict
 
     def collate_batch_train(self, batch):
+        '''功能：
+        初始化存储容器。
+        遍历批次中的样本，提取并存储其数据。
+        将数据转换为 PyTorch 张量。
+        合并点云特征并处理标签。
+        生成先验编码和变换矩阵。
+        构造最终的输出字典。
+        数据结构：
+
+        '''
         # Intermediate fusion is different the other two
         output_dict = {'ego': {}}
 
@@ -381,19 +402,20 @@ class IntermediateFusionSicpDataset(basedataset.BaseDataset):
 
             if self.visualize:
                 origin_lidar.append(ego_dict['origin_lidar'])
-        # convert to numpy, (B, max_num, 7)
+        # convert to numpy, (B, max_num, 7)  
+        '''张量转换,形式如上'''
         object_bbx_center = torch.from_numpy(np.array(object_bbx_center))
         object_bbx_mask = torch.from_numpy(np.array(object_bbx_mask))
 
         # example: {'voxel_features':[np.array([1,2,3]]),
         # np.array([3,5,6]), ...]}
-        merged_feature_dict = self.merge_features_to_dict(processed_lidar_list)
+        merged_feature_dict = self.merge_features_to_dict(processed_lidar_list)#合并点云信息
         processed_lidar_torch_dict = \
-            self.pre_processor.collate_batch(merged_feature_dict)
+            self.pre_processor.collate_batch(merged_feature_dict) # 对合并的特征进行批量化处理，生成统一格式
         # [2, 3, 4, ..., M], M <= max_cav
         record_len = torch.from_numpy(np.array(record_len, dtype=int))
         label_torch_dict = \
-            self.post_processor.collate_batch(label_dict_list)
+            self.post_processor.collate_batch(label_dict_list) #使用后处理器 collate_batch 对普通和自车的标签进行整理，生成模型输入需要的格式。
 
         label_torch_dict_ego = \
             self.post_processor.collate_batch(label_dict_ego_list)
