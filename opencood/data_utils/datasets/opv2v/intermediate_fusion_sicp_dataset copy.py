@@ -352,7 +352,7 @@ class IntermediateFusionSicpDataset(basedataset.BaseDataset):
         合并点云特征并处理标签。
         生成先验编码和变换矩阵。
         构造最终的输出字典。
-        数据结构：
+       
 
         '''
         # Intermediate fusion is different the other two
